@@ -129,6 +129,9 @@ def full_sa_fitness_vs_iteration_analysis():
     max_iters = 5000     # Maximum number of iterations for optimization
     schedule = mlrose.ExpDecay()  # Temperature decay for the Simulated Annealing
 
+    # Define the result dict to save the result
+    result = {}
+
     # Define fitness function and optimization problem
     fitness = mlrose.FourPeaks(t_pct=0.1)  # Create the fitness function object
     problem = mlrose.DiscreteOpt(length=n, fitness_fn=fitness, maximize=True, max_val=2)  # Create optmization problem object
@@ -136,8 +139,16 @@ def full_sa_fitness_vs_iteration_analysis():
     # Optimizing using Simulated Annealing
     _, sa_best_fitness, sa_fitness_vs_iter_curve = mlrose.simulated_annealing(
         problem=problem, schedule=schedule, max_attempts=max_attempts, max_iters=max_iters, curve=True, random_state=RANDOM_STATE)
+    result["Full Simulated Annealing"] = {"Best fitness": sa_best_fitness, "Iterations": sa_fitness_vs_iter_curve.shape[0]}
     print(f"\t- Best fitness: {sa_best_fitness}")
     print(f"\t- Iterations: {sa_fitness_vs_iter_curve.shape[0]}")
+
+    # Save the results as JSON
+    if not os.path.exists(RESULT_DIR):
+        os.mkdir(RESULT_DIR)
+    with open(os.path.join(RESULT_DIR, "full_sa_fitness_vs_iterations.json"), "w") as f:
+        json.dump(result, f)
+    print("- Results saved at: " + os.path.join(RESULT_DIR, "full_sa_fitness_vs_iterations.json"))
 
     # Plot the fitness vs iters curve for the algorithms
     if not os.path.exists(PLOT_DIR):
