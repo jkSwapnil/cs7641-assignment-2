@@ -1,0 +1,1 @@
+{"Random Hill Climb": {"Best fitness": 5.0, "Iterations": 111}, "Simulated Annealing": {"Best fitness": 15.0, "Iterations": 500}, "Genetic Algorithm": {"Best fitness": 100.0, "Iterations": 435}, "MIMIC": {"Best fitness": 19.0, "Iterations": 12}}
