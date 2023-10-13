@@ -1,2 +1,3 @@
-# cs7641-assignment-2
-Assignment 2 for cs7641
+# CS7641 Assignment 2: Randomized Optimization
+
+This project implements code for assignment 2 of CS7641
